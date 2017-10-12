@@ -1,0 +1,10 @@
+C:\Projects\Restarter\Restarter\bin\Debug\Restarter.pdb
+C:\Projects\Restarter\Restarter\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\Restarter\Restarter\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Restarter\Restarter\obj\Debug\Restarter.csprojResolveAssemblyReference.cache
+C:\Projects\Restarter\Restarter\obj\Debug\Restarter.pdb
+C:\Projects\Restarter\Restarter\bin\Debug\Restarter.exe
+C:\Projects\Restarter\Restarter\obj\Debug\Restarter.exe
+C:\Projects\Restarter\Restarter\bin\Debug\Restarter.exe.config
+C:\Projects\Restarter\Restarter\bin\Debug\Ionic.Zip.dll
+C:\Projects\Restarter\Restarter\bin\Debug\Ionic.Zip.xml
