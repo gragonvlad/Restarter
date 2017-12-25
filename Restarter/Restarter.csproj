@@ -66,10 +66,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Helpers\CPUHelper.cs" />
+    <Compile Include="Core\Helpers\INIFile.cs" />
     <Compile Include="Core\Helpers\Logger.cs" />
     <Compile Include="Core\Helpers\SlackManager.cs" />
     <Compile Include="Core\Helpers\UpdateManager.cs" />
     <Compile Include="Core\Objects\Attachment.cs" />
+    <Compile Include="Core\Objects\CPUInformation.cs" />
     <Compile Include="Core\Objects\Field.cs" />
     <Compile Include="Core\Objects\SlackEmbed.cs" />
     <Compile Include="Core\Objects\UpdateInformation.cs" />

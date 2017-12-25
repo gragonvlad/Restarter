@@ -12,7 +12,8 @@ namespace Restarter.Core.Helpers
     {
         public static void SendSlackMessage(string alertType, string alertText, string alertWarning)
         {
-            return;
+            IniFile file = new IniFile("restarter.ini");
+            if (file.Read("UseSlack", "SlackInformation") == "false") return;
             var request = (HttpWebRequest)WebRequest.Create("https://hooks.slack.com/services/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");
 
             SlackEmbed embed = new SlackEmbed();
@@ -40,7 +41,7 @@ namespace Restarter.Core.Helpers
                 stream.Write(data, 0, data.Length);
 
             var response = new StreamReader(((HttpWebResponse)request.GetResponse()).GetResponseStream()).ReadToEnd();
-            if(!string.IsNullOrEmpty(response)) Console.WriteLine($"Response Received From Slack: {response}");
+            if (!string.IsNullOrEmpty(response)) Logger.LogWarning($"Response Received From Slack: {response}");
         }
     }
 }

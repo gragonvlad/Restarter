@@ -28,7 +28,16 @@ namespace Restarter.Core.Helpers
         }
         public static UpdateInformation GetInformation()
         {
-            AssemblyName name = AssemblyName.GetAssemblyName("RustDedicated_Data/Managed/Oxide.Game.Rust.dll");
+            if (!File.Exists("RustDedicated_Data/Managed/Oxide.Rust.dll"))
+            {
+                return new UpdateInformation()
+                {
+                    currentVersion = "Oxide Not Found",
+                    latestVersion = "Oxide Not Found",
+                    needsUpdate = true
+                };
+            }
+            AssemblyName name = AssemblyName.GetAssemblyName("RustDedicated_Data/Managed/Oxide.Rust.dll");
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "OxideMod");
@@ -56,11 +65,11 @@ namespace Restarter.Core.Helpers
             UpdateInformation information = GetInformation();
             if (!information.needsUpdate)
             {
-                Console.WriteLine($"Oxide is up to date.\n * Found Version: {information.currentVersion}\n * Latest Version: {information.latestVersion}");
+                Logger.LogInfo($"Oxide is up to date.\n * Found Version: {information.currentVersion}\n * Latest Version: {information.latestVersion}");
                 callback.Invoke(false);
                 return;
             }
-            Console.WriteLine($"Oxide is out of date.\n * Found Version: {information.currentVersion}\n * Latest Version: {information.latestVersion}");
+            Logger.LogWarning($"Oxide is out of date.\n * Found Version: {information.currentVersion}\n * Latest Version: {information.latestVersion}");
             SlackManager.SendSlackMessage("Check", $"Oxide is out of date.\n * Found Version: {information.currentVersion}\n * Latest Version: {information.latestVersion}", "Updating");
             Thread thread = new Thread(() =>
             {
@@ -73,7 +82,7 @@ namespace Restarter.Core.Helpers
             });
             thread.Start();
             ProgressManager.CreateBar("Downloading Oxide", () => {
-                Console.WriteLine("\nDownload Completed.");
+                Logger.LogInfo("\nDownload Completed");
                 thread.Abort();
                 thread = new Thread(() =>
                 {
@@ -93,7 +102,7 @@ namespace Restarter.Core.Helpers
                 thread.Start();
                 ProgressManager.CreateBar("Extracting Files", () =>
                 {
-                    Console.WriteLine("\nUpdate completed. Starting server.");
+                    Logger.LogInfo("\nUpdate completed.Starting server.");
                     callback.Invoke(true);
                     thread.Abort();
                 });
